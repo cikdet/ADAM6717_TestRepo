@@ -1,0 +1,84 @@
+services:
+  # MING Stack
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    # restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
+    networks:
+      - iotstack
+
+  influxdb:
+    image: influxdb:latest
+    # restart: unless-stopped
+    environment:
+    - TZ=Asia/Kuala_Lumpur
+    - DOCKER_INFLUXDB_INIT_USERNAME=admin
+    - DOCKER_INFLUXDB_INIT_PASSWORD=password
+    - DOCKER_INFLUXDB_INIT_ORG=my-organisation
+    - DOCKER_INFLUXDB_INIT_BUCKET=iot-sensors
+    - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=A8C2B071-35F6-43F8-9F51-C5F584B2366B
+    - DOCKER_INFLUXDB_INIT_MODE=setup
+    ports:
+      - '8086:8086'
+    healthcheck:
+      test: ['CMD', 'influx', 'ping']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - iotstack
+
+  nodered:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+    # restart: unless-stopped
+    ports:
+      - 1880:1880
+    volumes:
+      - ./configuration/nodered/settings.js:/data/settings.js
+    networks:
+      - iotstack
+
+  grafana:
+    image: grafana/grafana:latest
+    # restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=password
+      - TZ=Asia/Kuala_Lumpur
+    ports:
+      - '3000:3000'
+    networks:
+      - iotstack
+
+  # Database and DBMS
+  mysql:
+    image: mysql:latest
+    # restart: unless-stopped
+    environment:
+      - TZ=Asia/Kuala_Lumpur
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=iot
+    ports:
+      - 3306:3306
+    networks:
+      - iotstack
+  adminer:
+    image: adminer:latest
+    # restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: mysql
+    ports:
+      - 8080:8080
+    networks:
+      - iotstack
+
+networks:
+  iotstack:
+    driver: bridge
