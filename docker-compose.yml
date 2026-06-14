@@ -7,8 +7,8 @@ services:
       - 1883:1883
       - 9001:9001
     volumes:
-      - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
+      - ./Configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./Configuration/mosquitto/password.txt:/mosquitto/config/password.txt
     networks:
       - iotstack
 
@@ -42,7 +42,7 @@ services:
     ports:
       - 1880:1880
     volumes:
-      - ./configuration/nodered/settings.js:/data/settings.js
+      - ./Configuration/Node-Red/settings.js:/data/settings.js
     networks:
       - iotstack
 
