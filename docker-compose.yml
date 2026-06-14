@@ -7,8 +7,8 @@ services:
       - 1883:1883
       - 9001:9001
     volumes:
-      - ./Configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - ./Configuration/mosquitto/password.txt:/mosquitto/config/password.txt
+      - ./configuration/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./configuration/mosquitto/password.txt:/mosquitto/config/password.txt
     networks:
       - iotstack
 
@@ -23,6 +23,7 @@ services:
     - DOCKER_INFLUXDB_INIT_BUCKET=iot-sensors
     - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=A8C2B071-35F6-43F8-9F51-C5F584B2366B
     - DOCKER_INFLUXDB_INIT_MODE=setup
+    
     ports:
       - '8086:8086'
     healthcheck:
@@ -42,7 +43,7 @@ services:
     ports:
       - 1880:1880
     volumes:
-      - ./Configuration/Node-Red/settings.js:/data/settings.js
+      - ./configuration/nodered/settings.js:/data/settings.js
     networks:
       - iotstack
 
