@@ -58,28 +58,4 @@ services:
     networks:
       - iotstack
 
-  # Database and DBMS
-  mysql:
-    image: mysql:latest
-    # restart: unless-stopped
-    environment:
-      - TZ=Asia/Kuala_Lumpur
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=iot
-    ports:
-      - 3306:3306
-    networks:
-      - iotstack
-  adminer:
-    image: adminer:latest
-    # restart: unless-stopped
-    environment:
-      ADMINER_DEFAULT_SERVER: mysql
-    ports:
-      - 8080:8080
-    networks:
-      - iotstack
-
-networks:
-  iotstack:
-    driver: bridge
+  
