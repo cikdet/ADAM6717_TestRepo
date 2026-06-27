@@ -5,9 +5,7 @@ ariffin@myduino.com
 
 as an original owner of this repository. https://github.com/ariffinzulkifli/iot-middleware
 
-This repository is a training platform on how to setup docker compose to PC.
-
-This repository will be upgrade from time to time
+This repository is a training platform on how to setup docker compose to PC. The installation for this repo is purposely for connecting ADAM 6717 IoT/Edge Controller from Advantech to communicate locally through personal computer (PC).  
 
 
 
@@ -73,19 +71,19 @@ Wait until all containers is successfully `Created` like below.
 
 7.1 Node-RED http://localhost:1880 (username: `admin`, password: `password`)
 
-![Docker Desktop Node-RED](images/docker-desktop-nodered.png)
+
 
 7.2 InfluxDB http://localhost:8086 (username: `admin`, password: `password`)
 
-![Docker Desktop InfluxDB](images/docker-desktop-influxdb.png)
+
 
 7.3 Grafana http://localhost:3000 (username: `admin`, password: `password`)
 
-![Docker Desktop Grafana](images/docker-desktop-grafana.png)
+
 
 7.4 Adminer http://localhost:8060 (username: `root`, password: `password`)
 
-![Docker Desktop Adminer](images/docker-desktop-adminer.png)
+
 
 You can also verify the containers using command like below:
 ```bash
